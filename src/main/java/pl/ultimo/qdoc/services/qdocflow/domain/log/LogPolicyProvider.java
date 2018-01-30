@@ -28,7 +28,7 @@ public class LogPolicyProvider {
   }
 
 
-  LogPolicy get() {
+  public LogPolicy get() {
     List<LogAppender> chain = map.get(systemConfig.getProfile());
     return new ChainLogPolicy(chain);
   }

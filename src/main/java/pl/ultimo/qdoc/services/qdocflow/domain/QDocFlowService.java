@@ -1,7 +1,7 @@
 package pl.ultimo.qdoc.services.qdocflow.domain;
 
 import pl.ultimo.qdoc.services.qdocflow.domain.log.LogLevel;
-import pl.ultimo.qdoc.services.qdocflow.domain.log.LogPolicy;
+import pl.ultimo.qdoc.services.qdocflow.domain.log.LogPolicyProvider;
 import pl.ultimo.qdoc.services.shared.QDocId;
 
 public class QDocFlowService {
@@ -9,11 +9,12 @@ public class QDocFlowService {
 
   private final QDocumentRepo repo;
   private final QDocFactory qDocFactory;
-  private LogPolicy logPolicy;
+  private final LogPolicyProvider logPolicyProvider;
 
-  public QDocFlowService(QDocumentRepo repo, QDocFactory qDocFactory) {
+  public QDocFlowService(QDocumentRepo repo, QDocFactory qDocFactory, LogPolicyProvider logPolicyProvider) {
     this.repo = repo;
     this.qDocFactory = qDocFactory;
+    this.logPolicyProvider = logPolicyProvider;
   }
 
   public void create(QDocType qDocType, QDocId qDocId) {
@@ -21,7 +22,7 @@ public class QDocFlowService {
   }
 
   void toVerify() {
-    logPolicy.log("starting verification", LogLevel.INFO);
+    logPolicyProvider.get().log("starting verification", LogLevel.INFO);
   }
 
   void verify() {
