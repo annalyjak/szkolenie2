@@ -1,7 +1,7 @@
 package pl.ultimo.qdoc.gateway;
 
-import pl.ultimo.qdoc.services.qdocflow.QDocFlowService;
-import pl.ultimo.qdoc.services.qdocflow.QDocType;
+import pl.ultimo.qdoc.services.qdocflow.domain.QDocFlowService;
+import pl.ultimo.qdoc.services.qdocflow.domain.QDocType;
 import pl.ultimo.qdoc.services.shared.QDocId;
 
 public class QDocsResource {
