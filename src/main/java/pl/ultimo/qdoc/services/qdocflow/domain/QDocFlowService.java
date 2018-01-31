@@ -5,6 +5,7 @@ import pl.ultimo.qdoc.services.qdocflow.domain.log.LogPolicyProvider;
 import pl.ultimo.qdoc.services.qdocflow.domain.validation.QDocValidatorProvider;
 import pl.ultimo.qdoc.services.shared.QDocId;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 public class QDocFlowService {
@@ -40,6 +41,15 @@ public class QDocFlowService {
 
   void archive(QDocId qDocId) {
     repo.accept(qDocId, qDocument -> qDocument.archive(qDocValidatorProvider.get()));
+  }
+
+
+  void bulcPublish(List<QDocId> docs) {
+    // Ag ag = load(docs);
+    // ag.bulkPublish()
+    // save(ag);
+
+
   }
 
 }

@@ -5,7 +5,11 @@ import pl.ultimo.qdoc.services.shared.QDocId;
 import java.util.function.Consumer;
 
 public interface QDocumentRepo {
-  void save(QDocument qDocument);
+  // @Transactional
+  default void save(QDocument qDocument) {
+    // dao.save(qDocument)
+    // eventPublisher.publish(qDocument.getEvents())
+  }
 
   QDocument load(QDocId qDocId);
 
