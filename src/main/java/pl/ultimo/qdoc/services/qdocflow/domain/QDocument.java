@@ -34,4 +34,8 @@ public class QDocument {
     qdocValidationPolicy.validate(QDocStatus.PUBLISHED, getQDocData());
     this.qDocStatus = QDocStatus.PUBLISHED;
   }
+
+  public void archive(QDocValidationPolicy qDocValidationPolicy) {
+
+  }
 }

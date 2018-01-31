@@ -2,9 +2,10 @@ package pl.ultimo.qdoc.services.qdocflow.domain;
 
 import pl.ultimo.qdoc.services.qdocflow.domain.log.LogLevel;
 import pl.ultimo.qdoc.services.qdocflow.domain.log.LogPolicyProvider;
-import pl.ultimo.qdoc.services.qdocflow.domain.validation.QDocValidationPolicy;
 import pl.ultimo.qdoc.services.qdocflow.domain.validation.QDocValidatorProvider;
 import pl.ultimo.qdoc.services.shared.QDocId;
+
+import java.util.function.Consumer;
 
 public class QDocFlowService {
 
@@ -30,26 +31,15 @@ public class QDocFlowService {
   }
 
   void verify(QDocId qDocId) {
-
-    QDocument qDocument = repo.load(qDocId);
-    QDocValidationPolicy qdocValidationPolicy = qDocValidatorProvider.get();
-
-    qDocument.verify(qdocValidationPolicy);
-
-    repo.save(qDocument);
-
+    repo.accept(qDocId, qDocument -> qDocument.verify(qDocValidatorProvider.get()));
   }
 
   void publish(QDocId qDocId) {
-    QDocument qDocument = repo.load(qDocId);
-    QDocValidationPolicy qdocValidationPolicy = qDocValidatorProvider.get();
-
-    qDocument.publish(qdocValidationPolicy);
-
-    repo.save(qDocument);
+    repo.accept(qDocId, qDocument -> qDocument.publish(qDocValidatorProvider.get()));
   }
 
-  void archive() {
-
+  void archive(QDocId qDocId) {
+    repo.accept(qDocId, qDocument -> qDocument.archive(qDocValidatorProvider.get()));
   }
+
 }
